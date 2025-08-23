@@ -224,18 +224,19 @@ def decode(args, batch_input_ids, dec_depth, model, tokenizer):
         hist_freq    = (hist_counts / (gen_len + 1e-8)).unsqueeze(1)
         hist_pen     = torch.clamp(1 - getattr(args, 'dsab_beta_hist', 0.5) * hist_freq, 0.5, 1.0)
         # 11) Mix logits
+
         S_mix = (
             global_alpha * log_p_ctx
-            + (1 - global_alpha) * log_p_pri + 1*Delta
+            + (1 - global_alpha) * log_p_pri + gamma*Delta
             # + tau_t * local_gate * Delta * freq_pen
         )
         S_mix = S_mix + torch.log(hist_pen)
 
-        # ==== Entropy Gap Δ-booster ====
-        H2       = 1.0 - torch.sum(F.softmax(S_mix, dim=-1) ** 2, dim=-1, keepdim=True)
-        H2_norm  = torch.clamp(H2 / (1.0 + H2), 0.0, 1.0)
-        kappa_H2 = getattr(args, 'dsab_kappa_H2', 0.5)
-        S_mix    = S_mix + kappa_H2 * H2_norm * Delta
+        # # ==== Entropy Gap Δ-booster ====
+        # H2       = 1.0 - torch.sum(F.softmax(S_mix, dim=-1) ** 2, dim=-1, keepdim=True)
+        # H2_norm  = torch.clamp(H2 / (1.0 + H2), 0.0, 1.0)
+        # kappa_H2 = getattr(args, 'dsab_kappa_H2', 0.5)
+        # S_mix    = S_mix + kappa_H2 * H2_norm * Delta
 
         # ==== **Margin-z-score peak amplifier [NEW]** ====
         # even when Δ≈0, this boosts whichever logits are already slightly higher
