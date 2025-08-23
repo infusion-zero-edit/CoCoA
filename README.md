@@ -1,4 +1,4 @@
-## CoCoA (CoCoA: Confidence- and Context-Aware Adaptive Decoding for Resolving Knowledge Conflicts in Large Language Models)
+## CoCoA (CoCoA: Confidence- and Context-Aware Adaptive Decoding for Resolving Knowledge Conflicts in Large Language Models) [EMNLP 2025]
 Code for the paper [CoCoA: Confidence- and Context-Aware Adaptive Decoding for Resolving Knowledge Conflicts in Large Language Models].
 
 by [Anant Khandelwal], [Manish Gupta], [Puneet Agrawal]
