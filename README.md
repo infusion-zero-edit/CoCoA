@@ -3,7 +3,7 @@ Code for the paper [CoCoA: Confidence- and Context-Aware Adaptive Decoding for R
 
 by [Anant Khandelwal], [Manish Gupta], [Puneet Agrawal]
 
-![image](https://github.com/user-attachments/assets/0df89574-1dd7-40f7-8187-7652e0ea05ed)
+![image](https://github.com/infusion-zero-edit/CoCoA/blob/main/cocoa2_new.pdf)
 
 ## Requirements
 You can install all required packages by running the following command:
