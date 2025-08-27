@@ -198,7 +198,7 @@ def decode(args, batch_input_ids, dec_depth, model, tokenizer):
         gamma        = getattr(args, 'dsab_gamma', 1.0)
         raw_a        = torch.sigmoid(gamma * Delta_H + gamma * D2_norm)
         global_alpha = torch.clamp(raw_a, 0.1, 0.9)
-        global_alpha = 0.5
+        global_alpha = 0.5   #comment this ig global_alpha needs to be tunable.
         # 7) Token-wise contrast Δ and robust z
         Delta_med    = torch.median(log_p_ctx - log_p_pri, dim=-1, keepdim=True)[0]
         Delta_mad    = torch.median(torch.abs((log_p_ctx - log_p_pri) - Delta_med), dim=-1, keepdim=True)[0] + 1e-8
@@ -228,11 +228,11 @@ def decode(args, batch_input_ids, dec_depth, model, tokenizer):
         S_mix = (
             global_alpha * log_p_ctx
             + (1 - global_alpha) * log_p_pri + gamma*Delta
-            # + tau_t * local_gate * Delta * freq_pen
+            # + tau_t * local_gate * Delta * freq_pen  #uncomment if gamma needs to be tunable and comment gamma*Delata
         )
         S_mix = S_mix + torch.log(hist_pen)
 
-        # # ==== Entropy Gap Δ-booster ====
+        # # ==== Entropy Gap Δ-booster ==== #*******************#uncomment this if needs booster based on entropy gap
         # H2       = 1.0 - torch.sum(F.softmax(S_mix, dim=-1) ** 2, dim=-1, keepdim=True)
         # H2_norm  = torch.clamp(H2 / (1.0 + H2), 0.0, 1.0)
         # kappa_H2 = getattr(args, 'dsab_kappa_H2', 0.5)
