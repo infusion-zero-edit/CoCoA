@@ -56,7 +56,7 @@ We sincerely thank the authors of [AdaCAD](https://github.com/HanNight/AdaCAD) f
 ## Citation
 ```bibtex
 @inproceedings{khandelwal25_cocoa,
-  title={\textsc{CoCoA}: \underline{Co}nfidence- and \underline{Co}ntext-Aware \underline{A}daptive Decoding for Resolving Knowledge Conflicts in Large Language Models},
+  title={CoCoA: Confidence- and Context-Aware Adaptive Decoding for Resolving Knowledge Conflicts in Large Language Models},
   author={Khandelwal, Anant and Gupta, Manish and Agrawal, Puneet},
   booktitle={Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
   pages={To appear},
